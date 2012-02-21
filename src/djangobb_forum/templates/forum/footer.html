@@ -39,7 +39,18 @@
                 {% endfor %}
             </div>
             {% endif %}
-            <p class="conr">Powered by <a href="http://djangobb.org/">DjangoBB</a></p>
+        </div>
+    </div>
+
+    <div class="row">
+        {% block controls %}{% endblock %}
+    </div>
+
+    <div class="row">
+        <div class="span5">
+            <p>Powered by <a href="http://djangobb.org/">DjangoBB</a> and <a href="http://twitter.github.com/bootstrap/">Twitter's Bootstrap</a></p>
+        </div>
+        <div class="span2">
 {% if not settings.DEBUG %}
 <!--LiveInternet counter--><script type="text/javascript"><!--
 document.write("<a href='http://www.liveinternet.ru/click' "+
@@ -56,8 +67,9 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 <div>Disabled in DEBUG mode</div>
 {% endif %}
         </div>
+        <div class="span5">
+        </div>
     </div>
-    {% block controls %}{% endblock %}
 </footer>
 
 {% if forum_settings.LOFI_SUPPORT %}
