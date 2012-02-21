@@ -7,14 +7,13 @@
 {% else %}
 	<tr>
 {% endif %}
-	<td class="span1"></td>
 	<td class="tcl">
 		<div class="intd">
 			<div class="icon">
 				<div class="nosize"><!-- --></div>
 			</div>
 			<div class="tclcon">
-				<h3>{% link forum %} <a href="{% url djangobb:forum_forum_feed forum.id %}"><img src="{{ MEDIA_URL }}forum/img/feed-icon-small.png"  alt="[RSS Feed]" title="[RSS Feed]" class="rss" /></a></h3>
+				<h4>{% link forum %} <a href="{% url djangobb:forum_forum_feed forum.id %}"><img src="{{ MEDIA_URL }}forum/img/feed-icon-small.png"  alt="[RSS Feed]" title="[RSS Feed]" class="rss" /></a></h4>
 				{{ forum.description|safe }}				
 				<p>
 				{% cache 6000 moderators forum.id %}
@@ -36,5 +35,4 @@
 			{% endif %}
 		{% endif %}
 	</td>
-	<td class="span1"></td>
 </tr>

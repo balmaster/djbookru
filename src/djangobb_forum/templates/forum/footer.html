@@ -1,0 +1,72 @@
+{% load forum_extras %}
+{% load i18n %}
+
+<footer>
+    <div class="row">
+        <div class="span4">
+            <h4>{% trans "Board information" %}</h4>
+            <ul class="unstyled">
+                <li>{% trans "Total number of registered users:" %} <strong>{{ users }}</strong></li>
+                <li>{% trans "Total number of topics:" %} <strong>{{ topics }}</strong></li>
+                <li>{% trans "Total number of posts:" %} <strong>{{ posts }}</strong></li>
+            </ul>
+        </div>
+        <div class="span4">
+            <h4>{% trans "User information" %}</h4>
+            <ul class="unstyled">
+                <li>{% trans "Newest registered user:" %} {{ last_user|profile_link }}</li>
+                <li>{% trans "Registered users online:" %} <strong>{{ online_count }}</strong></li>
+                <li>{% trans "Guests online:" %} <strong>{{ guest_count }}</strong></li>
+            </ul>
+        </div>
+        <div class="span4">
+            <h4>{% trans "Search links" %}</h4>
+            <ul class="unstyled">
+                <li><a href="{% url djangobb:search %}?action=show_24h">{% trans "Show recent posts" %}</a></li>
+                <li><a href="{% url djangobb:search %}?action=show_unanswered">{% trans "Show unanswered posts" %}</a></li>
+                {% if user.is_authenticated %}
+                <li><a href="{% url djangobb:search %}?action=show_subscriptions">{% trans "Show your subscribed topics" %}</a></li>
+                <li><a href="{% url djangobb:search %}?action=show_user&amp;user_id={{ request.user.id }}">{% trans "Show your posts" %}</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div class="span4">
+            {% if online_count %}
+            <h4>{% trans "Online" %}</h4>
+            <div>
+                {% for online in users_online %}
+                    <span>{{ online|profile_link }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <p class="conr">Powered by <a href="http://djangobb.org/">DjangoBB</a></p>
+{% if not settings.DEBUG %}
+<!--LiveInternet counter--><script type="text/javascript"><!--
+document.write("<a href='http://www.liveinternet.ru/click' "+
+"target=_blank><img src='//counter.yadro.ru/hit?t52.6;r"+
+escape(document.referrer)+((typeof(screen)=="undefined")?"":
+";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+";"+Math.random()+
+"' alt='' title='LiveInternet: показано число просмотров и"+
+" посетителей за 24 часа' "+
+"border='0' width='88' height='31'><\/a>")
+//--></script><!--/LiveInternet-->
+{% else %}
+<div>Disabled in DEBUG mode</div>
+{% endif %}
+        </div>
+    </div>
+    {% block controls %}{% endblock %}
+</footer>
+
+{% if forum_settings.LOFI_SUPPORT %}
+<div id="brdfooter" class="block">
+    <div class="box">
+        <div class="inbox" align="center">
+            <a href="{% url djangobb:lofi_index %}">Lo-Fi Version</a>
+            <div class="clearer"></div>
+        </div>
+    </div>
+</div>
+{% endif %}
